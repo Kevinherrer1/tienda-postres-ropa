@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Allura, Bricolage_Grotesque, DM_Sans } from 'next/font/google'
+import { headers } from 'next/headers'
 import { getAjustes } from '@/lib/content'
 import './globals.css'
 
@@ -15,10 +16,12 @@ const description =
   'Postres artesanales hechos a mano y ropa para todos los estilos: deportiva, casual y más. Haz tu pedido por WhatsApp.'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { nombre } = await getAjustes()
+  const [{ nombre }, encabezados] = await Promise.all([getAjustes(), headers()])
+  const host = encabezados.get('host') ?? 'localhost:3000'
+  const protocolo = host.startsWith('localhost') ? 'http' : 'https'
   const title = `${nombre} — Postres y Ropa`
   return {
-    metadataBase: new URL(process.env.URL ?? 'http://localhost:3000'),
+    metadataBase: new URL(`${protocolo}://${host}`),
     title,
     description,
     openGraph: { title, description, locale: 'es_VE', type: 'website' },

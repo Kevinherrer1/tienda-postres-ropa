@@ -1,10 +1,20 @@
-import { NextStudio } from 'next-sanity/studio'
-import config from '@/sanity.config'
+import type { Metadata, Viewport } from 'next'
 import { isSanityConfigured } from '@/sanity/env'
+import { Studio } from './studio'
 
 export const dynamic = 'force-static'
 
-export { metadata, viewport } from 'next-sanity/studio'
+export const metadata: Metadata = {
+  title: 'Panel de la tienda',
+  robots: { index: false },
+  referrer: 'same-origin',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+}
 
 export default function StudioPage() {
   if (!isSanityConfigured) {
@@ -19,5 +29,5 @@ export default function StudioPage() {
     )
   }
 
-  return <NextStudio config={config} />
+  return <Studio />
 }

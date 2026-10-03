@@ -12,8 +12,6 @@ import {
   type Product,
 } from '@/lib/products'
 
-export const REVALIDATE_SECONDS = 60
-
 type SanityImage = Parameters<typeof imageUrl>[0]
 
 type ProductoDoc = {
@@ -43,7 +41,7 @@ type AjustesDoc = {
 } | null
 
 async function fetchSanity<T>(query: string): Promise<T> {
-  return client.fetch<T>(query, {}, { next: { revalidate: REVALIDATE_SECONDS } })
+  return client.fetch<T>(query, {}, { cache: 'no-store' })
 }
 
 export const getAjustes = cache(async (): Promise<Ajustes> => {
