@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Allura, Bricolage_Grotesque, DM_Sans } from 'next/font/google'
 import { getAjustes } from '@/lib/content'
@@ -40,7 +39,6 @@ export default function RootLayout({
     <html lang="es" className={`${display.variable} ${sans.variable} ${script.variable} bg-background`}>
       <body className="antialiased">
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
