@@ -83,9 +83,9 @@ export const portada: Portada = {
 
 export function formatPrice(value: number) {
   const decimals = Number.isInteger(value) ? 0 : 2
-  return new Intl.NumberFormat('es-ES', {
+  return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'EUR',
+    currency: 'USD',
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   }).format(value)

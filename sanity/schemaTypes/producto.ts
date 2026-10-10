@@ -30,7 +30,8 @@ export const producto = defineType({
     }),
     defineField({
       name: 'precio',
-      title: 'Precio (€)',
+      title: 'Precio ($)',
+      description: 'En dólares. Escribe solo el número, por ejemplo 25 o 12.50.',
       type: 'number',
       validation: (rule) => rule.required().min(0),
     }),
@@ -68,7 +69,7 @@ export const producto = defineType({
     select: { title: 'nombre', categoria: 'categoria', precio: 'precio', media: 'foto' },
     prepare({ title, categoria, precio, media }) {
       const tipo = categoria === 'ropa' ? 'Ropa' : 'Postre'
-      return { title, subtitle: precio != null ? `${tipo} · ${precio} €` : tipo, media }
+      return { title, subtitle: precio != null ? `${tipo} · $${precio}` : tipo, media }
     },
   },
 })
